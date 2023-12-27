@@ -1,6 +1,6 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+    background-color: white;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -8,7 +8,7 @@ body {
 }
 
 .container {
-    background-color: #fff;
+    background-color: wheat;
     padding: 60px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -26,7 +26,7 @@ label {
 
 input {
     padding: 8px;
-    border: 1px solid #ccc;
+    border: 1px solid whitesmoke;
     border-radius: 4px;
 }
 
@@ -34,7 +34,7 @@ button {
     padding: 10px;
     background-color: #007bff;
     margin-top: 40px;
-    color: #fff;
+    color: whitesmoke;
     border: none;
     border-radius: 4px;
     cursor: pointer;
@@ -55,7 +55,7 @@ table {
 }
 
 th, td {
-    border: 1px solid #ddd;
+    border: 1px solid white;
     padding: 8px;
     text-align: left;
 }
