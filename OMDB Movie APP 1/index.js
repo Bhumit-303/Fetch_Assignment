@@ -1,34 +1,39 @@
-function searchMovie() {
-    const apiKey = 'omdbapi.com'; 
-    const searchInput = document.getElementById('searchInput').value;
+const key = "7ea2c3b2";
+        const movieName = document.getElementById("movieName");
+        const searchbtn = document.getElementById('searchbtn');
+        const movieDetailsContainer = document.getElementById('movieDetails');
 
-    if (searchInput === '') {
-        alert('Please enter a movie title');
-        return;
-    }
+        searchbtn.addEventListener("click", function () {
+            const name = movieName.value;
 
-    const apiUrl = `https://www.omdbapi.com/?apikey=${apiKey}&t=${encodeURIComponent(searchInput)}`;
+            fetch(`https://omdbapi.com/?apikey=${key}&t=${name}`)
+                .then(res => res.json())
+                .then(data => {
+                    console.log(data);
+                    showData(data);
+                })
+                .catch(error => {
+                    console.log(error);
+                });
+        });
 
-    fetch(apiUrl)
-        .then(response => response.json())
-        .then(data => {
-            if (data.Response === 'True') {
-                displayMovieDetails(data);
+        function showData(data) {
+            // Clear previous results
+            movieDetailsContainer.innerHTML = '';
+
+            if (data.Response === "True") {
+                let title = document.createElement("h1");
+                title.innerText = data.Title;
+
+                let year = document.createElement("h2");
+                year.innerText = data.Year;
+
+                let img = document.createElement("img");
+                img.src = data.Poster;
+
+                movieDetailsContainer.append(title, year, img);
             } else {
-                alert('Movie not found!');
+                // Display an error message or handle the case when the movie is not found
+                movieDetailsContainer.innerHTML = '<p>Movie not found!</p>';
             }
-        })
-        .catch(error => console.error('Error fetching data:', error));
-}
-
-function displayMovieDetails(movie) {
-    const movieDetailsContainer = document.getElementById('movieDetails');
-    movieDetailsContainer.innerHTML = `
-        <h2>${movie.Title}</h2>
-        <p><strong>Year:</strong> ${movie.Year}</p>
-        <p><strong>Genre:</strong> ${movie.Genre}</p>
-        <p><strong>Director:</strong> ${movie.Director}</p>
-        <p><strong>Plot:</strong> ${movie.Plot}</p>
-        <img src="${movie.Poster}" alt="${movie.Title} Poster" style="max-width: 300px;">
-    `;
-}
+        }
